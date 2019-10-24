@@ -5,8 +5,8 @@ import javax.swing.JPanel;
 
 public class LeagueInvaders {
 	
-	final int w = 500;
-	final int h = 800;
+	final static int w = 500;
+	final static int h = 800;
 	
 	JFrame frame;
 	GamePanel panel;
@@ -30,6 +30,7 @@ public class LeagueInvaders {
 		frame.getContentPane().setPreferredSize(new Dimension(w,h));
 		frame.show();
 		frame.add(panel);
+		frame.addKeyListener(panel);
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
