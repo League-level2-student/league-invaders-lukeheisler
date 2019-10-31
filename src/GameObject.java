@@ -13,13 +13,9 @@ public class GameObject {
 	
 	void update() {
 		
-		y+=10;
-		
 	}
 	
 	void draw(Graphics g) {
-		
-		g.fillRect(x, y, 100, 100);
 		
 	}
 	
