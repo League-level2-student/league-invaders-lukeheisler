@@ -18,6 +18,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
 	Font titleFont;
 	Font subtitleFont;
+	Rocketship rocketship = new Rocketship(250, 700, 50, 50);
+	ObjectManager objectManager = new ObjectManager(rocketship);
 
 	GamePanel() {
 		
@@ -38,6 +40,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 	
 	void updateGameState() {
+		
+		objectManager.update();
 		
 	}
 	
@@ -62,6 +66,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, LeagueInvaders.w, LeagueInvaders.h);
+		objectManager.draw(g);
 		
 	}
 	
@@ -109,18 +114,30 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				drawEndState(g);
 				break;
 		}
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
 		int keyCode = e.getKeyCode();
-		System.out.println(keyCode);
 		if(keyCode == KeyEvent.VK_ENTER) {
 			currentState++;
 			if(currentState > END_STATE) {
 				currentState = MENU_STATE;
 			}
-			System.out.println(currentState);
+		}
+		if(keyCode == KeyEvent.VK_UP) {
+			rocketship.direction = "up";
+		}
+		else if(keyCode == KeyEvent.VK_DOWN) {
+			rocketship.direction = "down";
+		}
+		else if(keyCode == KeyEvent.VK_LEFT) {
+			rocketship.direction = "left";
+		}
+		else if(keyCode == KeyEvent.VK_RIGHT) {
+			rocketship.direction = "right";
 		}
 		
 	}
@@ -128,14 +145,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 
-		
+		rocketship.direction = "still";
 		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-
-		
 		
 	}
 	
