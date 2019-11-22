@@ -43,6 +43,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		objectManager.update();
 		objectManager.manageEnemies();
+		objectManager.checkCollisions();
+		objectManager.purgeObjects();
+		
+		if(rocketship.isAlive==false) {
+			currentState = END_STATE;
+		}
 		
 	}
 	
@@ -127,6 +133,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			currentState++;
 			if(currentState > END_STATE) {
 				currentState = MENU_STATE;
+			}
+			if(currentState == END_STATE) {
+				rocketship = new Rocketship(250, 700, 50, 50);
+				objectManager = new ObjectManager(rocketship);
 			}
 		}
 		if(keyCode == KeyEvent.VK_UP) {
